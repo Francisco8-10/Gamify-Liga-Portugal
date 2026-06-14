@@ -1,0 +1,18 @@
+# Exclude other projects
+/bilheteira/
+
+# Dependencies & Cache
+**/node_modules/
+**/.cache/
+**/.tmp/
+**/.strapi/
+**/dist/
+
+# OS/Local configs
+.DS_Store
+Thumbs.db
+.vscode/
+
+# Environment files
+**/.env
+!**/.env.example

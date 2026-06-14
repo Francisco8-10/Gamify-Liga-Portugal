@@ -1,0 +1,27 @@
+{
+  "kind": "collectionType",
+  "collectionName": "credits",
+  "info": {
+    "singularName": "credit",
+    "pluralName": "credits",
+    "displayName": "Credit"
+  },
+  "options": {
+    "draftAndPublish": false
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "user": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "plugin::users-permissions.user"
+    },
+    "amount": {
+      "type": "integer",
+      "required": true
+    },
+    "reason": {
+      "type": "string"
+    }
+  }
+}

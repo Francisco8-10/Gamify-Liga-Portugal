@@ -1,0 +1,35 @@
+{
+  "kind": "collectionType",
+  "collectionName": "prizes",
+  "info": {
+    "singularName": "prize",
+    "pluralName": "prizes",
+    "displayName": "Prize"
+  },
+  "options": {
+    "draftAndPublish": false
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "name": {
+      "type": "string",
+      "required": true
+    },
+    "description": {
+      "type": "text"
+    },
+    "image": {
+      "type": "string"
+    },
+    "cost": {
+      "type": "integer",
+      "required": true
+    },
+    "category": {
+      "type": "string"
+    },
+    "icon": {
+      "type": "string"
+    }
+  }
+}

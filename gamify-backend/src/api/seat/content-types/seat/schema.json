@@ -1,0 +1,39 @@
+{
+  "kind": "collectionType",
+  "collectionName": "seats",
+  "info": {
+    "singularName": "seat",
+    "pluralName": "seats",
+    "displayName": "Seat"
+  },
+  "options": {
+    "draftAndPublish": false
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "game": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::game.game"
+    },
+    "sector": {
+      "type": "string",
+      "required": true
+    },
+    "row": {
+      "type": "string"
+    },
+    "number": {
+      "type": "integer"
+    },
+    "isReserved": {
+      "type": "boolean",
+      "default": false
+    },
+    "reservedBy": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "plugin::users-permissions.user"
+    }
+  }
+}

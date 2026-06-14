@@ -1,0 +1,28 @@
+{
+  "kind": "collectionType",
+  "collectionName": "redemptions",
+  "info": {
+    "singularName": "redemption",
+    "pluralName": "redemptions",
+    "displayName": "Redemption"
+  },
+  "options": {
+    "draftAndPublish": false
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "user": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "plugin::users-permissions.user"
+    },
+    "prize": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::prize.prize"
+    },
+    "credits_spent": {
+      "type": "integer"
+    }
+  }
+}

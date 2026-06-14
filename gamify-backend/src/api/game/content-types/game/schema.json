@@ -1,0 +1,48 @@
+{
+  "kind": "collectionType",
+  "collectionName": "games",
+  "info": {
+    "singularName": "game",
+    "pluralName": "games",
+    "displayName": "Game"
+  },
+  "options": {
+    "draftAndPublish": false
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "gameId": {
+      "type": "string",
+      "required": true,
+      "unique": true
+    },
+    "homeTeam": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::team.team"
+    },
+    "awayTeam": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::team.team"
+    },
+    "date": {
+      "type": "date",
+      "required": true
+    },
+    "time": {
+      "type": "string",
+      "required": true
+    },
+    "sectors": {
+      "type": "json"
+    },
+    "active": {
+      "type": "boolean",
+      "default": true
+    },
+    "jornada": {
+      "type": "integer"
+    }
+  }
+}
