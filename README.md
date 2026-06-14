@@ -1,4 +1,4 @@
-# Gamify - Liga Portugal Monorepo
+# Gamify - Liga Portugal 
 
 Este repositório contém a aplicação Gamify Liga Portugal, estruturada em duas partes principais:
 
