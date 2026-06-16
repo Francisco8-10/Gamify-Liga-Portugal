@@ -5,7 +5,8 @@ import { useUserStore } from '../stores/user'
 const userStore = useUserStore()
 
 const progressPercent = computed(() => {
-  return (userStore.xp / userStore.xpNextLevel) * 100
+  if (!userStore.nextRewardCost) return 0
+  return Math.min(100, (userStore.coins / userStore.nextRewardCost) * 100)
 })
 </script>
 
@@ -14,7 +15,7 @@ const progressPercent = computed(() => {
     <!-- Header -->
     <header class="home-header">
       <div style="width: 32px;"></div>
-      <span class="header-logo-text">GAMIFY</span>
+      <span class="header-logo-text">FANPRIZES</span>
       <div style="width: 32px;"></div>
     </header>
 
@@ -28,7 +29,7 @@ const progressPercent = computed(() => {
       <div class="reward-progress-section">
         <div class="reward-labels">
           <span class="reward-next">Próximo Prémio</span>
-          <span class="reward-target">{{ userStore.xpNextLevel }} pts</span>
+          <span class="reward-target">{{ userStore.nextRewardCost }} créditos</span>
         </div>
         <div class="progress-bar-bg">
           <div class="progress-bar-fill-green" :style="{ width: `${progressPercent}%` }"></div>
@@ -43,22 +44,22 @@ const progressPercent = computed(() => {
     <div class="stats-grid-custom">
       <div class="stat-card-light">
         <div class="stat-icon-wrapper">
-          <!-- Soccer Ball Icon -->
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="green-icon-svg">
-            <circle cx="12" cy="12" r="10" />
-            <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10zM2 12h20" />
+          <!-- Ticket Icon -->
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="green-icon-svg">
+            <path d="M2 9a3 3 0 0 1 0 6v2a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2v-2a3 3 0 0 1 0-6V7a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2Z" />
+            <path d="M13 5v2M13 17v2M13 11v2" />
           </svg>
         </div>
-        <span class="stat-large-val">{{ userStore.gamesWatched }}</span>
-        <span class="stat-subtext">Jogos Assistidos</span>
+        <span class="stat-large-val">{{ userStore.ticketsPurchased }}</span>
+        <span class="stat-subtext">Bilhetes Comprados</span>
       </div>
 
       <div class="stat-card-light">
         <div class="stat-icon-wrapper">
-          <!-- Ring/Gauge Icon -->
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="green-icon-svg">
+          <!-- Coins/Credits Icon -->
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="green-icon-svg">
             <circle cx="12" cy="12" r="10" />
-            <path d="M12 6a6 6 0 1 1 0 12 6 6 0 0 1 0-12" stroke-dasharray="30 10" />
+            <path d="M12 6v12M15 9H10.5a2.25 2.25 0 0 0 0 4.5h3a2.25 2.25 0 0 1 0 4.5H9" />
           </svg>
         </div>
         <span class="stat-large-val">{{ userStore.creditsEarned }}</span>
@@ -134,10 +135,12 @@ const progressPercent = computed(() => {
 }
 .header-logo-text {
   font-family: var(--font-heading);
-  font-size: 1.25rem;
+  font-size: 1.3rem;
   font-weight: 800;
   color: #000000;
   letter-spacing: 0.05em;
+  text-align: center;
+  white-space: nowrap;
 }
 
 /* Saldo Card */
@@ -301,6 +304,7 @@ const progressPercent = computed(() => {
   align-items: center;
   justify-content: center;
   margin-right: 16px;
+  flex-shrink: 0;
 }
 .green-bg-circle {
   background: #e6f4ea;

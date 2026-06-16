@@ -10,8 +10,8 @@ export default defineConfig({
       registerType: 'autoUpdate',
       includeAssets: ['favicon.svg', 'icons.svg'],
       manifest: {
-        name: 'Gamify App',
-        short_name: 'Gamify',
+        name: 'Liga Portuguesa FanPrizes App',
+        short_name: 'FanPrizes',
         description: 'Uma aplicação de gamificação para aumentar produtividade e foco',
         theme_color: '#f8f9fa',
         background_color: '#f8f9fa',

@@ -31,7 +31,7 @@ const loadPrizes = async () => {
         category: p.category || 'Merchandise',
         icon: p.icon || 'coffee',
         image: p.image || ''
-      }));
+      })).sort((a, b) => a.cost - b.cost);
     }
   } catch (err) {
     console.error('Erro ao carregar catálogo de prémios:', err);
@@ -130,7 +130,7 @@ const closeModal = () => {
       </button>
       <div v-else style="width: 32px;"></div>
 
-      <span class="header-logo-text">GAMIFY</span>
+      <span class="header-logo-text">FANPRIZES</span>
 
       <div style="width: 32px;"></div>
     </header>
@@ -397,10 +397,12 @@ const closeModal = () => {
 }
 .header-logo-text {
   font-family: var(--font-heading);
-  font-size: 1.25rem;
+  font-size: 1.3rem;
   font-weight: 800;
   color: #000000;
   letter-spacing: 0.05em;
+  text-align: center;
+  white-space: nowrap;
 }
 .header-balance-pill {
   background: #f1f3f4;
@@ -596,7 +598,10 @@ const closeModal = () => {
   font-size: 0.75rem;
   color: #6b7280;
   margin-bottom: 16px;
-  min-height: 32px;
+  min-height: 3.75rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .price-tag-green {
@@ -607,6 +612,7 @@ const closeModal = () => {
   font-family: var(--font-heading);
   font-size: 0.85rem;
   font-weight: 700;
+  margin-top: auto;
 }
 .price-tag-insufficient {
   background: #fce8e6;
@@ -616,6 +622,7 @@ const closeModal = () => {
   font-family: var(--font-heading);
   font-size: 0.85rem;
   font-weight: 700;
+  margin-top: auto;
 }
 
 /* Modals */

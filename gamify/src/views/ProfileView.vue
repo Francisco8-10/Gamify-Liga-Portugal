@@ -1,8 +1,17 @@
 <script setup>
 import { ref, computed, watch } from 'vue'
 import { useUserStore } from '../stores/user'
+import { useAuthStore } from '../stores/auth'
+import { useRouter } from 'vue-router'
 
 const userStore = useUserStore()
+const authStore = useAuthStore()
+const router = useRouter()
+
+const handleLogout = () => {
+  authStore.logout()
+  router.push('/login')
+}
 
 const nameInput = ref(userStore.name)
 const emailInput = ref(userStore.email)
@@ -60,7 +69,7 @@ const showNotification = (msg, type) => {
     <!-- Header dedicated matching mockup -->
     <header class="profile-header">
       <div style="width: 32px;"></div>
-      <span class="header-logo-text">GAMIFY</span>
+      <span class="header-logo-text">FANPRIZES</span>
       <div style="width: 32px;"></div>
     </header>
 
@@ -131,6 +140,16 @@ const showNotification = (msg, type) => {
       </div>
     </div>
 
+    <!-- Terminar Sessão Section -->
+    <div class="logout-section animate-fade-in">
+      <button @click="handleLogout" class="logout-btn">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="logout-icon-svg">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 9V5.25A2.25 2.25 0 0013.5 3h-6a2.25 2.25 0 00-2.25 2.25v13.5A2.25 2.25 0 007.5 21h6a2.25 2.25 0 002.25-2.25V15M12 9l-3 3m0 0l3 3m-3-3h12" />
+        </svg>
+        Terminar Sessão
+      </button>
+    </div>
+
     <!-- Notification Toast -->
     <transition name="fade">
       <div v-if="notification" class="notification-toast" :class="notification.type">
@@ -156,10 +175,12 @@ const showNotification = (msg, type) => {
 }
 .header-logo-text {
   font-family: var(--font-heading);
-  font-size: 1.25rem;
+  font-size: 1.3rem;
   font-weight: 800;
   color: #000000;
   letter-spacing: 0.05em;
+  text-align: center;
+  white-space: nowrap;
 }
 
 /* Profile Card */
@@ -340,5 +361,36 @@ const showNotification = (msg, type) => {
 }
 .fade-enter-from, .fade-leave-to {
   opacity: 0;
+}
+
+/* Logout Styles */
+.logout-section {
+  margin-bottom: 40px;
+}
+.logout-btn {
+  background: #fce8e6;
+  color: #c5221f;
+  font-weight: 700;
+  font-size: 1rem;
+  padding: 14px;
+  border-radius: 8px;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  border: 1px solid #fecaca;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+.logout-btn:hover {
+  background: #fcdbd7;
+}
+.logout-btn:active {
+  transform: scale(0.99);
+}
+.logout-icon-svg {
+  width: 20px;
+  height: 20px;
 }
 </style>

@@ -67,7 +67,7 @@ const handleRegister = async () => {
       </div>
 
       <!-- Gamify Text Logo (Only on Register screen) -->
-      <div class="gamify-logo">GAMIFY</div>
+      <div class="gamify-logo">Liga Portuguesa FanPrizes</div>
 
       <!-- Header Titles -->
       <h1 class="auth-title">Criar Conta</h1>
@@ -255,12 +255,13 @@ const handleRegister = async () => {
 /* Gamify bold header */
 .gamify-logo {
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-  font-size: 2.35rem;
+  font-size: 1.65rem;
   font-weight: 900;
   color: #000000;
   letter-spacing: -0.01em;
   margin-bottom: 24px;
-  line-height: 1;
+  line-height: 1.1;
+  text-align: center;
 }
 
 /* Titles */

@@ -16,6 +16,8 @@ export const useUserStore = defineStore('user', {
     coins: 0,
     streak: 3, // Streak is client-side mock
     gamesWatched: 0,
+    ticketsPurchased: 0,
+    nextRewardCost: 0,
     creditsEarned: 0,
     rescues: 0,
     achievements: [],
@@ -98,6 +100,25 @@ export const useUserStore = defineStore('user', {
         });
         this.gamesWatched = uniqueGameIds.size;
 
+        // 7. Calcular Bilhetes Comprados
+        let totalTickets = 0;
+        ordersList.forEach(order => {
+          let tks = [];
+          if (typeof order.tickets === 'string') {
+            try {
+              tks = JSON.parse(order.tickets);
+            } catch (e) {
+              tks = [];
+            }
+          } else if (Array.isArray(order.tickets)) {
+            tks = order.tickets;
+          }
+          tks.forEach(tk => {
+            totalTickets += Number(tk.qty) || 0;
+          });
+        });
+        this.ticketsPurchased = totalTickets;
+
         // 8. Construir a lista combinada de Atividades Recentes
         const activities = [];
         
@@ -129,6 +150,32 @@ export const useUserStore = defineStore('user', {
         this.recentActivities = activities;
 
         // Achievements are no longer tracked
+
+        // 9. Calcular o custo do próximo prémio
+        let nextCost = 0;
+        try {
+          const resPrizes = await fetch('/api/prizes', { headers });
+          const jPrizes = await resPrizes.json();
+          const prizesList = jPrizes.data || [];
+          const sortedPrizes = prizesList
+            .map(p => Number(p.cost) || 0)
+            .sort((a, b) => a - b);
+          
+          // Encontrar o primeiro prémio que o utilizador NÃO consegue pagar
+          const nextAffordable = sortedPrizes.find(cost => cost > this.coins);
+          if (nextAffordable) {
+            nextCost = nextAffordable;
+          } else if (sortedPrizes.length > 0) {
+            // Se consegue pagar todos, o target é o mais caro
+            nextCost = sortedPrizes[sortedPrizes.length - 1];
+          } else {
+            nextCost = 500; // default fallback
+          }
+        } catch (err) {
+          console.error('Erro ao calcular custo do próximo prémio:', err);
+          nextCost = 500;
+        }
+        this.nextRewardCost = nextCost;
 
       } catch (err) {
         console.error('Erro na sincronização de dados:', err);
