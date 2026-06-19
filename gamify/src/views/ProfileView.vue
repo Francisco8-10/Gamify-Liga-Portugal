@@ -365,7 +365,7 @@ const showNotification = (msg, type) => {
 
 /* Logout Styles */
 .logout-section {
-  margin-bottom: 40px;
+  margin-bottom: 96px;
 }
 .logout-btn {
   background: #fce8e6;
